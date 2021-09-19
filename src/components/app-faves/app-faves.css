@@ -1,0 +1,30 @@
+
+ion-card img {
+  width: 100%;
+  object-fit: contain;
+  height: 290px;
+}
+
+#noData {
+  text-align: center;
+}
+
+#noData h3 {
+  font-weight: bold;
+}
+
+#favesList {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (min-width: 1000px) {
+  ion-card img {
+    height: 290px;
+  }
+
+  ion-card ion-card-content {
+    height: 55px;
+  }
+}

@@ -1,0 +1,16 @@
+#loggedInDiv img {
+  height: 1.8em;
+  border-radius: 50%;
+}
+
+#loggedInDiv {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  margin-right: 12px;
+}
+
+#login-actions {
+  display: flex;
+  justify-content: center;
+}

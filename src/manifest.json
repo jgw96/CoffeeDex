@@ -1,0 +1,37 @@
+{
+  "name": "CoffeeDex",
+  "short_name": "CoffeeDex",
+  "start_url": "/",
+  "display": "standalone",
+  "description": "Start checking in your favorite Coffees! Share you favorite coffee you recently tried with your friends!",
+  "icons": [
+    {
+      "src": "assets/icon/coffee-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/coffee-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/coffee-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/screen1.png"
+    },
+    {
+      "src": "assets/screenshots/screen2.png"
+    },
+    {
+      "src": "assets/screenshots/screen3.png"
+    }
+  ],
+  "background_color": "#8d6e63",
+  "theme_color": "#8d6e63"
+}

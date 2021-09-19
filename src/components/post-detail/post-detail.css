@@ -1,0 +1,43 @@
+#detailImg {
+  border-radius: 12px;
+  min-height: 290px;
+
+  height: 380px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #8d6e6326;
+}
+
+#headerButtons {
+  display: none;
+}
+
+post-detail ion-content::part(scroll) {
+  padding: 16px;
+}
+
+#poster {
+  font-size: 12px;
+}
+
+@media (min-width: 1000px) {
+  #detailImg {
+    width: 50%;
+  }
+
+  #headerButtons {
+    display: initial;
+  }
+
+  ion-footer {
+    display: none !important;
+  }
+
+  #detailItem {
+    width: 30em;
+  }
+
+  #find-shop {
+    width: 10em;
+  }
+}

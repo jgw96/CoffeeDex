@@ -1,0 +1,91 @@
+#introSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+#introSection p {
+  font-weight: bold;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+ion-card {
+  animation-name: slidein !important;
+  animation-duration: 300ms;
+}
+
+ion-card img {
+  width: 100%;
+  object-fit: contain;
+  height: 290px;
+}
+
+#homeShare {
+  margin-left: 12px;
+}
+
+#ratingLabel {
+  display: flex;
+  align-items: center;
+}
+
+#starsSpan {
+  margin-top: 4px;
+  margin-left: 5px;
+  display: block;
+  color: var(--ion-color-primary);
+}
+
+#introImg {
+  width: 16em;
+}
+
+#header-login::part(visiting) {
+  display: none;
+}
+
+#header-login #visiting {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  ion-card img {
+    height: 300px;
+  }
+
+  ion-card ion-card-content {
+    height: 55px;
+  }
+
+  ion-card {
+    max-width: 30em;
+  }
+
+  #introImg {
+    width: 24em;
+  }
+
+  #checkinList {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+
+  #introSection p {
+    width: 20em;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

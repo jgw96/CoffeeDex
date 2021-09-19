@@ -1,0 +1,151 @@
+video {
+  width: 100%;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#dataEntry {
+  position: fixed;
+  bottom: 0;
+  padding: 1em;
+  box-shadow: 0 -3px 14px 5px #757575;
+  z-index: 9999;
+  overflow-y: auto;
+
+  width: 100%;
+  height: 100%;
+
+  animation-name: slideup;
+  animation-duration: 350ms;
+}
+
+ion-progress-bar {
+  margin-top: 10px;
+  
+}
+
+#rotateBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#dataHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  color: white;
+  margin-top: 0;
+}
+
+#dataHeader ion-icon {
+  font-size: 2em;
+}
+
+#dataHeader h3 {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  #dataEntry {
+    background-color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #dataEntry {
+    background-color: #1a1b1e;
+    box-shadow: none;
+  }
+}
+
+#checkinButtonWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: transparent;
+  padding: 24px;
+  backdrop-filter: blur(12px)
+}
+
+#canceL {
+  margin-top: 1em;
+}
+
+#productImage {
+  border-radius: 12px;
+  margin-bottom: 1em;
+}
+
+ion-fab-button {
+  animation-name: fadein;
+  animation-duration: 300ms;
+}
+
+ion-range {
+  margin-bottom: 6em;
+}
+
+#placesList {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+  z-index: 999999;
+  /* box-shadow: 3px 0px 5px 3px black; */
+  margin: 8px;
+  border: solid 2px black;
+  border-radius: 4px;
+}
+
+#placesList li {
+  padding: 8px;
+  border: solid 1px var(--ion-color-primary);
+  margin-bottom: 8px;
+  cursor: pointer;
+
+  color: var(--ion-text-color);
+}
+
+#rotateCameraButton {
+  position: fixed;
+  bottom: 14px;
+  right: 6px;
+  font-size: 1.2em;
+}
+
+#openPhotosButton {
+  position: fixed;
+  bottom: 14px;
+  left: 6px;
+  font-size: 1.2em;
+}
+
+@keyframes slideup {
+  from {
+    transform: translateY(160px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
