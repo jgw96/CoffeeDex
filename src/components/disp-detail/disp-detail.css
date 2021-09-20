@@ -16,3 +16,10 @@
 ion-content::part(scroll) {
   padding: 0;
 }
+
+@media (min-width: 800px) {
+  #shop-checkin-list {
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+  }
+}

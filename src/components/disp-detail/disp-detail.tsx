@@ -79,8 +79,8 @@ export class DispDetail {
 
         {this.dispCheckins ? (
           <div>
-            <ion-list>
-              <h4 id="checkinHeader">Checkins from {this.disp.name}</h4>
+            <h4 id="checkinHeader">Checkins from {this.disp.name}</h4>
+            <ion-list id="shop-checkin-list">
 
               {this.dispCheckins.map((checkin) => {
                 let stars = [];
@@ -93,7 +93,7 @@ export class DispDetail {
                   <ion-card>
                     <img
                       onClick={() => this.postDetail(checkin.postID)}
-                      src={checkin.image || "/assets/leaf.svg"}
+                      src={checkin.image || "/assets/coffee.svg"}
                       alt={checkin.name}
                     ></img>
                     <ion-card-header

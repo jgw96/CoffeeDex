@@ -26,7 +26,7 @@ export class AppDisps {
         </ion-toolbar>
       </ion-header>,
       <ion-content class="ion-padding">
-        <ion-list>
+        <ion-list id="shops-list">
           {this.disps
             ? this.disps.map((disp) => {
                 return (

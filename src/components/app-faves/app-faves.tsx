@@ -47,7 +47,7 @@ export class AppFaves {
             this.posts.map((checkin) => {
               return (
                 <ion-card>
-                  <img src={checkin.image || '/assets/leaf.svg'} alt={checkin.name}></img>
+                  <img src={checkin.image || '/assets/coffee.svg'} alt={checkin.name}></img>
                   <ion-card-header>
                     <ion-card-subtitle>From: {checkin.shop ? checkin.shop.name : checkin.brand}</ion-card-subtitle>
                     <ion-card-title>{checkin.name}</ion-card-title>

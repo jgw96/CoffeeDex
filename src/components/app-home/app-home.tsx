@@ -123,7 +123,7 @@ export class AppHome {
                 <ion-card>
                   <img
                     onClick={() => this.postDetail(checkin.postID)}
-                    src={checkin.image || "/assets/leaf.svg"}
+                    src={checkin.image || "/assets/coffee.svg"}
                     alt={checkin.name}
                   ></img>
                   <ion-card-header
@@ -198,11 +198,10 @@ export class AppHome {
           </ion-list>
         ) : (
           <div id="introSection">
-            <img id="introImg" src="/assets/leaf.svg" alt="intro image"></img>
+            <img id="introImg" src="/assets/coffee.svg" alt="intro image"></img>
 
             <p>
-              Start checking in your favorite Coffees! Share you favorite coffee you recently tried
-              with your friends!
+            Start checking in your favorite Coffees! Share you favorite coffee and what you thought about it with the coffee loving community!
             </p>
 
             <app-login></app-login>

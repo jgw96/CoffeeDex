@@ -3,7 +3,7 @@
   "short_name": "CoffeeDex",
   "start_url": "/",
   "display": "standalone",
-  "description": "Start checking in your favorite Coffees! Share you favorite coffee you recently tried with your friends!",
+  "description": "Start checking in your favorite Coffees! Share you favorite coffee and what you thought about it with the coffee loving community!",
   "icons": [
     {
       "src": "assets/icon/coffee-256.png",

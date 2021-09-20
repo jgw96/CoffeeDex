@@ -19,7 +19,6 @@ ion-card {
 
 ion-card img {
   width: 100%;
-  object-fit: contain;
   height: 290px;
 }
 
@@ -60,10 +59,6 @@ ion-card img {
     height: 55px;
   }
 
-  ion-card {
-    max-width: 30em;
-  }
-
   #introImg {
     width: 24em;
   }
@@ -71,7 +66,7 @@ ion-card img {
   #checkinList {
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: auto auto auto;
   }
 
   #introSection p {
