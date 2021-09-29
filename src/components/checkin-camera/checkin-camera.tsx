@@ -2,6 +2,8 @@ import { Component, Element, h, Listen, State } from "@stencil/core";
 
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
+import { getAnalytics, logEvent } from "firebase/analytics";
+
 import {
   modalController,
   toastController,
@@ -173,6 +175,9 @@ export class CheckinCamera {
     console.log(newCheckin);
 
     await addCheckin(newCheckin);
+
+    const analytics = getAnalytics();
+    logEvent(analytics, 'actual_checkin');
 
     await loading.dismiss();
 

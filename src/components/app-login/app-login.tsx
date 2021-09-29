@@ -9,6 +9,8 @@ import {
   signInAnonymously,
 } from "firebase/auth";
 
+import { getAnalytics, logEvent } from "firebase/analytics";
+
 @Component({
   tag: "app-login",
   styleUrl: "app-login.css",
@@ -54,11 +56,17 @@ export class AppLogin {
   }
 
   async login() {
+    const analytics = getAnalytics();
+    logEvent(analytics, 'login_google');
+
     const auth = getAuth();
     signInWithRedirect(auth, this.provider);
   }
 
   async loginAnon() {
+    const analytics = getAnalytics();
+    logEvent(analytics, 'login_anon');
+
     const auth = getAuth();
     signInAnonymously(auth)
   }

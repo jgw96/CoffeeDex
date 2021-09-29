@@ -50,6 +50,27 @@ ion-card img {
   display: none;
 }
 
+.snap-picture {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 70vw;
+  margin-top: 2em;
+  background: #ffffff1a;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.snap-picture p {
+  text-align: start;
+  width: 14em;
+}
+
+.snap-picture img {
+  height: 20em;
+}
+
 @media (min-width: 1000px) {
   ion-card img {
     height: 300px;
@@ -71,6 +92,19 @@ ion-card img {
 
   #introSection p {
     width: 20em;
+  }
+}
+
+@media (max-width: 900px) {
+  .snap-picture {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .snap-picture p {
+    text-align: center;
   }
 }
 

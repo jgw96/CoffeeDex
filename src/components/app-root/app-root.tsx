@@ -2,6 +2,8 @@ import { Component, h } from "@stencil/core";
 
 import { initializeApp } from 'firebase/app';
 
+import { getAnalytics, logEvent } from "firebase/analytics";
+
 @Component({
   tag: "app-root",
   styleUrl: "app-root.css",
@@ -20,6 +22,9 @@ export class AppRoot {
     };
 
     await initializeApp(firebaseConfig);
+
+    const analytics = getAnalytics();
+    logEvent(analytics, 'app_initialized');
   }
 
   render() {

@@ -6,6 +6,7 @@ import {
 } from "@ionic/core";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 import { deleteCheckin, getMyCheckins } from "../../services/storage";
 
@@ -34,6 +35,9 @@ export class AppHome {
   }
 
   async checkin() {
+    const analytics = getAnalytics();
+    logEvent(analytics, 'init_checkin');
+
     const modal = await modalController.create({
       component: "checkin-camera",
     });
@@ -205,6 +209,24 @@ export class AppHome {
             </p>
 
             <app-login></app-login>
+
+            <div class="snap-picture">
+              <p>
+                Just got a new bag of coffee beans and want to show your friends? CoffeeDex is perfect for that! Just snap a picture and post it!
+              </p>
+
+              <img src="/assets/coffee-snap.png" aria-hidden="true"></img>
+            </div>
+
+            <div class="snap-picture">
+              <p>
+                Keep up with all the different coffee's you have tried and remember what you liked the most!
+                Coffeedex keeps all your coffees in one place and share them with the community! You can also see what others are trying
+                on the community tab!
+              </p>
+
+              <img src="/assets/home-page.png" aria-hidden="true"></img>
+            </div>
           </div>
         )}
 
