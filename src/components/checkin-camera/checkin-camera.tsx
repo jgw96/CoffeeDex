@@ -360,7 +360,7 @@ export class CheckinCamera {
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked">Coffee Shop</ion-label>
+            <ion-label position="stacked">Purchased at</ion-label>
             <ion-input
               debounce={500}
               onIonChange={(event) => this.handleShop(event.target)}
@@ -375,7 +375,11 @@ export class CheckinCamera {
             <ul id="placesList">
               {this.places.map((place) => {
                 return (
-                  <li onClick={() => this.chooseShop(place)}>{place.name}</li>
+                  <li onClick={() => this.chooseShop(place)}>
+                    <div id="shop-name">{place.name}</div>
+
+                    <span>{place.address.streetAddress}</span>
+                  </li>
                 );
               })}
             </ul>
@@ -400,6 +404,7 @@ export class CheckinCamera {
               <ion-select-option value="Indoensia">Indonesia</ion-select-option>
               <ion-select-option value="Honduras">Honduras</ion-select-option>
               <ion-select-option value="India">India</ion-select-option>
+              <ion-select-option value="Guatemala">Guatemala</ion-select-option>
             </ion-select>
           </ion-item>
 

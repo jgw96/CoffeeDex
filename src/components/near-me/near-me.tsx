@@ -111,7 +111,7 @@ export class NearMe {
     posts.forEach((post) => {
       console.log(this.filterValue);
 
-      if (this.filterValue === "foast") {
+      if (this.filterValue === "roast") {
         if (post.roast.toLowerCase().includes(searchValue.toLowerCase())) {
           searchPosts.push(post);
         }
@@ -249,7 +249,7 @@ export class NearMe {
         </ion-toolbar>
 
         <ion-list id="nearMeList" lines="none">
-          {this.posts ?
+          {this.posts && this.posts.length > 0 ?
             this.posts.map((post) => {
               return (
                 <ion-item>
