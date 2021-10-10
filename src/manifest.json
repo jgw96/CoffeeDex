@@ -33,5 +33,14 @@
     }
   ],
   "background_color": "#8d6e63",
-  "theme_color": "#8d6e63"
+  "theme_color": "#8d6e63",
+  "shortcuts": [
+    {
+      "name": "Add a Coffee",
+      "short_name": "Add a Coffee",
+      "description": "Add a new Coffee to your dex.",
+      "url": "/?shortcut",
+      "icons": [{ "src": "assets/icon/coffee-256.png", "sizes": "256x256" }]
+    }
+  ]
 }

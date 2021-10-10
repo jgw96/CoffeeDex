@@ -2,6 +2,7 @@
 ion-card img {
   width: 100%;
   height: 290px;
+  object-fit: cover;
 }
 
 #noData {

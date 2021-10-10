@@ -30,8 +30,17 @@ export class AppHome {
         if (data && data.length > 0) {
           this.checkins = data;
         }
+
+        await this.handleShortcut();
       }
-    })
+    });
+  }
+
+  async handleShortcut() {
+    const search = location.search;
+    if (search && search.includes("shortcut") && this.authed) {
+      await this.checkin();
+    }
   }
 
   async checkin() {
