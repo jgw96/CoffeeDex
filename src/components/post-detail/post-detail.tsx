@@ -44,13 +44,13 @@ export class PostDetail {
 
     if ((navigator as any).share) {
       await (navigator as any).share({
-        title: "coffeedex",
+        title: "CoffeeDex",
         text: "Check out this product I found",
-        url: `https://coffeedex-app.web.app/${this.post.postID}`,
+        url: `https://coffeedex.app/${this.post.postID}`,
       });
     } else if (navigator.clipboard) {
       await navigator.clipboard.writeText(
-        `https://coffeedex-app.web.app/${this.post.postID}`
+        `https://coffeedex.app/${this.post.postID}`
       );
 
       const toast = await toastController.create({

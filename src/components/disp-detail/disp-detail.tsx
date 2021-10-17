@@ -22,7 +22,7 @@ export class DispDetail {
   async share() {
     if ((navigator as any).share) {
       await (navigator as any).share({
-        title: "coffeedex",
+        title: "CoffeeDex",
         text: "Check out this shop I found",
         url: this.disp.url,
       });

@@ -1,14 +1,12 @@
 import { Component, h, State } from "@stencil/core";
 
-import {
-  modalController,
-  alertController,
-} from "@ionic/core";
+import { modalController, alertController, toastController } from "@ionic/core";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
 import { deleteCheckin, getMyCheckins } from "../../services/storage";
+import { get, set } from "idb-keyval";
 
 @Component({
   tag: "app-home",
@@ -34,6 +32,29 @@ export class AppHome {
         await this.handleShortcut();
       }
     });
+
+    const cookieCheck = await get("cookie-check");
+    if (!cookieCheck) {
+      await this.cookieCheck();
+    }
+  }
+
+  async cookieCheck() {
+    const alert = await toastController.create({
+      header: "Cookie Policy",
+      message:
+        "Don't worry, this is the only banner you will see 😊. This app uses cookies to help improve the experience of CoffeeDex. By continuing to use this app, you agree to our use of cookies.",
+      buttons: [
+        {
+          text: "Accept",
+          handler: () => {
+            set("cookie-check", true);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async handleShortcut() {
@@ -45,7 +66,7 @@ export class AppHome {
 
   async checkin() {
     const analytics = getAnalytics();
-    logEvent(analytics, 'init_checkin');
+    logEvent(analytics, "init_checkin");
 
     const modal = await modalController.create({
       component: "checkin-camera",
@@ -66,7 +87,7 @@ export class AppHome {
 
   async postDetail(id) {
     const router = document.querySelector("ion-router");
-    await router.push(`/${id}`, 'forward');
+    await router.push(`/${id}`, "forward");
   }
 
   async deleteItem(event, post) {
@@ -143,10 +164,7 @@ export class AppHome {
                     onClick={() => this.postDetail(checkin.postID)}
                   >
                     <ion-card-subtitle>
-                      From:{" "}
-                      {checkin.shop
-                        ? checkin.shop.name
-                        : checkin.brand}
+                      From: {checkin.shop ? checkin.shop.name : checkin.brand}
                     </ion-card-subtitle>
                     <ion-card-title>{checkin.name}</ion-card-title>
                   </ion-card-header>
@@ -214,27 +232,31 @@ export class AppHome {
             <img id="introImg" src="/assets/coffee.svg" alt="intro image"></img>
 
             <p>
-            Start checking in your favorite Coffees! Share you favorite coffee and what you thought about it with the coffee loving community!
+              Start checking in your favorite Coffees! Share you favorite coffee
+              and what you thought about it with the coffee loving community!
             </p>
 
             <app-login></app-login>
 
             <div class="snap-picture">
               <p>
-                Just got a new bag of coffee beans and want to show your friends? CoffeeDex is perfect for that! Just snap a picture and post it!
+                Just got a new bag of coffee beans and want to show your
+                friends? CoffeeDex is perfect for that! Just snap a picture and
+                post it!
               </p>
 
-              <img src="/assets/coffee-snap.png" aria-hidden="true"></img>
+              <img src="/assets/screenshots/screen2.png" aria-hidden="true"></img>
             </div>
 
             <div class="snap-picture">
               <p>
-                Keep up with all the different coffee's you have tried and remember what you liked the most!
-                Coffeedex keeps all your coffees in one place and share them with the community! You can also see what others are trying
-                on the community tab!
+                Keep up with all the different coffee's you have tried and
+                remember what you liked the most! CoffeeDex keeps all your
+                coffees in one place, you can even
+                also see what others are trying on the community tab!
               </p>
 
-              <img src="/assets/home-page.png" aria-hidden="true"></img>
+              <img src="/assets/screenshots/screen1.png" aria-hidden="true"></img>
             </div>
           </div>
         )}
@@ -246,9 +268,10 @@ export class AppHome {
             horizontal="end"
             slot="fixed"
           >
-            <ion-fab-button onClick={() => this.checkin()}>
-              <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
+            <ion-button onClick={() => this.checkin()}>
+              <span>Check In</span>
+              <ion-icon slot="end" name="add"></ion-icon>
+            </ion-button>
           </ion-fab>
         ) : null}
       </ion-content>,

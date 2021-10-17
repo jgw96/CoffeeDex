@@ -68,7 +68,7 @@ export class AppSettings {
             </ion-item>
           </ion-list>
 
-          <pwa-install>Install coffeedex</pwa-install>
+          <pwa-install>Install CoffeeDex</pwa-install>
 
           <div id="setActions">
             <ion-button expand="block" onClick={() => this.logout()}>
