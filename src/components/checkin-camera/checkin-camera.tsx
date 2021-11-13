@@ -105,36 +105,38 @@ export class CheckinCamera {
     // const imageRef = storageRef.child(`${Math.random().toString()}`);
     const imageRef = ref(storageRef, `${Math.random().toString()}`);
 
-    console.log('imageRef', imageRef);
+    console.log("imageRef", imageRef);
 
-    await uploadBytes(imageRef, imageBlob)
+    await uploadBytes(imageRef, imageBlob);
 
     let imageURL;
 
     try {
       imageURL = await getDownloadURL(imageRef);
-      console.log('imageURL', imageURL);
-    }
-    catch(err) {
+      console.log("imageURL", imageURL);
+    } catch (err) {
       console.error(err);
     }
 
     return imageURL;
   }
 
-  async checkIN() {
+  async checkIN(ev) {
+    ev.preventDefault();
+
     const loading = await loadingController.create({
       message: "Checking in...",
     });
     await loading.present();
 
-    const prodName = (this.el.querySelector(
-      "#productName input"
-    ) as HTMLInputElement).value;
+    const form = this.el.querySelector('form');
+    console.log(form);
+
+    const prodName = (
+      this.el.querySelector("#productName input") as HTMLInputElement
+    ).value;
     //  const shop = (this.el.querySelector("#brandName input") as HTMLInputElement).value;
-    const roast = (this.el.querySelector(
-      "#roastSelect"
-    ) as any).value;
+    const roast = (this.el.querySelector("#roastSelect") as any).value;
     const type = (this.el.querySelector("#typeSelect") as any).value;
     const rating = (this.el.querySelector("#rating") as any).value;
     const comments = (this.el.querySelector("#comments") as HTMLInputElement)
@@ -161,13 +163,13 @@ export class CheckinCamera {
 
     const newCheckin = {
       postID: Math.floor(Math.random() * 1000).toString(),
-      name: prodName,
-      rating: rating,
-      comments: comments,
-      shop: this.chosenDisp,
-      roast: roast,
-      type: type,
-      image: imageURL,
+      name: prodName || "Not Available",
+      rating: rating|| 0,
+      comments: comments || "Not Available",
+      shop: this.chosenDisp || "Not Available",
+      roast: roast || "Not Available",
+      type: type || "Not Available",
+      image: imageURL || "Not Available",
       user: user ? { name: user.displayName, photo: user.photoURL } : null,
       likes: [],
     };
@@ -177,11 +179,13 @@ export class CheckinCamera {
     await addCheckin(newCheckin);
 
     const analytics = getAnalytics();
-    logEvent(analytics, 'actual_checkin');
+    logEvent(analytics, "actual_checkin");
 
     await loading.dismiss();
 
     this.cancel();
+
+    ev.preventDefault();
   }
 
   async rotate() {
@@ -271,9 +275,7 @@ export class CheckinCamera {
   }
 
   chooseShop(place) {
-    const shop = this.el.querySelector(
-      "#brandName input"
-    ) as HTMLInputElement;
+    const shop = this.el.querySelector("#brandName input") as HTMLInputElement;
     shop.value = place.name;
 
     this.chosenDisp = place;
@@ -354,86 +356,94 @@ export class CheckinCamera {
             </ion-button>
           </div>
 
-          <ion-item>
-            <ion-label position="stacked">Name</ion-label>
-            <ion-input id="productName" type="text"></ion-input>
-          </ion-item>
+          <form onSubmit={(ev) => this.checkIN(ev)}>
+            <ion-item>
+              <ion-label position="stacked">Name</ion-label>
+              <ion-input id="productName" type="text" required></ion-input>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Purchased at</ion-label>
-            <ion-input
-              debounce={500}
-              onIonChange={(event) => this.handleShop(event.target)}
-              id="brandName"
-              type="text"
-            ></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Purchased at</ion-label>
+              <ion-input
+                debounce={500}
+                onIonChange={(event) => this.handleShop(event.target)}
+                id="brandName"
+                type="text"
+              ></ion-input>
+            </ion-item>
 
-          {this.dispLoading ? (
-            <ion-progress-bar type="indeterminate"></ion-progress-bar>
-          ) : this.places ? (
-            <ul id="placesList">
-              {this.places.map((place) => {
-                return (
-                  <li onClick={() => this.chooseShop(place)}>
-                    <div id="shop-name">{place.name}</div>
+            {this.dispLoading ? (
+              <ion-progress-bar type="indeterminate"></ion-progress-bar>
+            ) : this.places ? (
+              <ul id="placesList">
+                {this.places.map((place) => {
+                  return (
+                    <li onClick={() => this.chooseShop(place)}>
+                      <div id="shop-name">{place.name}</div>
 
-                    <span>{place.address.streetAddress}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : null}
+                      <span>{place.address.streetAddress}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : null}
 
-          <ion-item>
-            <ion-label>Roast</ion-label>
-            <ion-select id="roastSelect" placeholder="Dark">
-              <ion-select-option value="Dark">Dark</ion-select-option>
-              <ion-select-option value="Medium">Medium</ion-select-option>
-              <ion-select-option value="Light">Light</ion-select-option>
-            </ion-select>
-          </ion-item>
+            <ion-item>
+              <ion-label>Roast</ion-label>
+              <ion-select id="roastSelect" placeholder="Dark">
+                <ion-select-option value="Dark">Dark</ion-select-option>
+                <ion-select-option value="Medium">Medium</ion-select-option>
+                <ion-select-option value="Light">Light</ion-select-option>
+              </ion-select>
+            </ion-item>
 
-          <ion-item>
-            <ion-label>Country of Origin</ion-label>
-            <ion-select id="typeSelect" placeholder="Brazil">
-              <ion-select-option value="Brazil">Brazil</ion-select-option>
-              <ion-select-option value="Ethiopia">Ethiopia</ion-select-option>
-              <ion-select-option value="Colombia">Colombia</ion-select-option>
-              <ion-select-option value="Vietnam">Vietnam</ion-select-option>
-              <ion-select-option value="Indoensia">Indonesia</ion-select-option>
-              <ion-select-option value="Honduras">Honduras</ion-select-option>
-              <ion-select-option value="India">India</ion-select-option>
-              <ion-select-option value="Guatemala">Guatemala</ion-select-option>
-            </ion-select>
-          </ion-item>
+            <ion-item>
+              <ion-label>Country of Origin</ion-label>
+              <ion-select id="typeSelect" placeholder="Brazil">
+                <ion-select-option value="Brazil">Brazil</ion-select-option>
+                <ion-select-option value="Ethiopia">Ethiopia</ion-select-option>
+                <ion-select-option value="Colombia">Colombia</ion-select-option>
+                <ion-select-option value="Vietnam">Vietnam</ion-select-option>
+                <ion-select-option value="Indoensia">
+                  Indonesia
+                </ion-select-option>
+                <ion-select-option value="Honduras">Honduras</ion-select-option>
+                <ion-select-option value="India">India</ion-select-option>
+                <ion-select-option value="Guatemala">
+                  Guatemala
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Description and tasting notes</ion-label>
-            <ion-textarea id="comments"></ion-textarea>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">
+                Description and tasting notes
+              </ion-label>
+              <ion-textarea id="comments" required></ion-textarea>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Rating</ion-label>
-            <ion-range
-              id="rating"
-              min={1}
-              max={5}
-              step={1}
-              snaps={true}
-              pin={true}
-            ></ion-range>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Rating</ion-label>
+              <ion-range
+                id="rating"
+                min={1}
+                max={5}
+                step={1}
+                snaps={true}
+                pin={true}
+              ></ion-range>
+            </ion-item>
 
-          <div id="checkinButtonWrapper">
-            <ion-button
-              id="checkinButton"
-              expand="block"
-              onClick={() => this.checkIN()}
-            >
-              Check In
-            </ion-button>
-          </div>
+            <div id="checkinButtonWrapper">
+              <ion-button
+                id="checkinButton"
+                expand="block"
+                type="submit"
+              >
+                Check In
+              </ion-button>
+            </div>
+          </form>
         </div>
       ) : null,
 
