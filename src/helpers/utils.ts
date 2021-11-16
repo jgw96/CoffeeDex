@@ -46,3 +46,5 @@ export function removeDuplicates<T>(
     return true;
   });
 }
+
+export const appCheckToken = '6Lf2eDUdAAAAAI4K1QdiX2d_PGvfOG-SWpl_wK9F';

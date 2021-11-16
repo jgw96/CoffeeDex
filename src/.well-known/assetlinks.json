@@ -1,5 +1,6 @@
 [{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : { "namespace": "android_app", "package_name": "app.web.marydex_app.twa",
-               "sha256_cert_fingerprints": ["B3:82:6C:68:05:FE:C5:DD:D4:07:99:2F:92:26:B9:20:0D:72:99:2D:39:18:6E:59:BC:00:5D:66:C3:56:ED:28"] }
-}]
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.coffeedex.twa",
+                     "sha256_cert_fingerprints": ["E8:2D:41:CA:2C:9E:1C:34:31:52:A5:75:CB:6F:A6:31:E7:1C:93:05:47:31:5C:35:72:F0:9A:6F:20:E5:76:47"] }
+      }
+]

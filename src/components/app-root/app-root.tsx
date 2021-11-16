@@ -1,8 +1,9 @@
 import { Component, h } from "@stencil/core";
 
 import { initializeApp } from 'firebase/app';
-
 import { getAnalytics, logEvent } from "firebase/analytics";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { appCheckToken } from "../../helpers/utils";
 
 @Component({
   tag: "app-root",
@@ -21,8 +22,18 @@ export class AppRoot {
       measurementId: "G-7H7JZHE6LS"
     };
 
-    await initializeApp(firebaseConfig);
+    const app = await initializeApp(firebaseConfig);
 
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(appCheckToken),
+    
+      // Optional argument. If true, the SDK automatically refreshes App Check
+      // tokens as needed.
+      isTokenAutoRefreshEnabled: true
+    });
+  }
+
+  componentDidLoad() {
     const analytics = getAnalytics();
     logEvent(analytics, 'app_initialized');
   }
@@ -39,7 +50,6 @@ export class AppRoot {
           <ion-route url="/near" component="tab-near">
             <ion-route component="near-me"></ion-route>
             <ion-route url="/:postID" component="post-detail"></ion-route>
-            <ion-route url="/neardispensary/:name" component="disp-detail"></ion-route>
           </ion-route>
           <ion-route url="/shops" component="tab-disps">
             <ion-route component="app-disps"></ion-route>
